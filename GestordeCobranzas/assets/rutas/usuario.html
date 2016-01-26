@@ -1,0 +1,39 @@
+
+<!-- formulario <h1>Esta es la vista del usuario</h1> -->
+<div class="col-sm-4 container">
+      <form class="form-horizontal" ng-submit="agregarNuevoUsuario()" role="form">
+
+          <div class="form-group">
+              <label class="control-label col-sm-4" for="idnombre">CI:</label>
+              <div class="col-sm-8">
+                <input ng-model="nuevoUsuario.CI" type="text" class="form-control" id="idnombre" placeholder="CI" >
+              </div>
+          </div>
+          <div class="form-group">
+              <label class="control-label col-sm-4" for="idnombre">Razon Social:</label>
+              <div class="col-sm-8">
+                <input ng-model="nuevoUsuario.RazonSocial" type="text" class="form-control" id="idnombre" placeholder="Razo Social" >
+              </div>
+          </div>
+          
+          <div class="form-group">
+              <label class="control-label col-sm-4" for="idnombre">Telefono 1:</label>
+              <div class="col-sm-8">
+                <input ng-model="nuevoUsuario.Telefono_1" type="text" class="form-control" id="idnombre" placeholder="Telefono 1" >
+              </div>
+          </div>
+          <div class="form-group">
+              <label class="control-label col-sm-4" for="idnombre">Telefono 2:</label>
+              <div class="col-sm-8">
+                <input ng-model="nuevoUsuario.Telefono_2" type="text" class="form-control" id="idnombre" placeholder="Telefono 2" >
+              </div>
+          </div>
+          <div class="form-group">
+              <label class="control-label col-sm-4" for="idnombre">Direccion: </label>
+              <div class="col-sm-8">
+                <input ng-model="nuevoUsuario.Direccion" type="text" class="form-control" id="idnombre" placeholder="Direccion" >
+              </div>
+          </div>
+          <button class="btn btn-success">Guardar</button>
+      </form>
+    </div>
