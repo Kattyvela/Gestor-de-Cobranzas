@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="MoraEditDlg" widgetVar="MoraEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditMoraTitle}">
+            <h:form id="MoraEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{moraController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditMoraLabel_moraPK_idMora}" for="moraPK_idMora" />
+                        <p:inputText id="moraPK_idMora" value="#{moraController.selected.moraPK.idMora}" title="#{bundle.EditMoraTitle_moraPK_idMora}" required="true" requiredMessage="#{bundle.EditMoraRequiredMessage_moraPK_idMora}"/>
+                        <p:outputLabel value="#{bundle.EditMoraLabel_descripcion}" for="descripcion" />
+                        <p:inputText id="descripcion" value="#{moraController.selected.descripcion}" title="#{bundle.EditMoraTitle_descripcion}" required="true" requiredMessage="#{bundle.EditMoraRequiredMessage_descripcion}"/>
+                        <p:outputLabel value="#{bundle.EditMoraLabel_nroFactura}" for="nroFactura" />
+                        <p:inputText id="nroFactura" value="#{moraController.selected.nroFactura}" title="#{bundle.EditMoraTitle_nroFactura}" required="true" requiredMessage="#{bundle.EditMoraRequiredMessage_nroFactura}"/>
+                        <p:outputLabel value="#{bundle.EditMoraLabel_fechaFacturacion}" for="fechaFacturacion" />
+                        <p:calendar id="fechaFacturacion" pattern="MM/dd/yyyy" value="#{moraController.selected.fechaFacturacion}" title="#{bundle.EditMoraTitle_fechaFacturacion}" required="true" requiredMessage="#{bundle.EditMoraRequiredMessage_fechaFacturacion}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditMoraLabel_plazo}" for="plazo" />
+                        <p:inputText id="plazo" value="#{moraController.selected.plazo}" title="#{bundle.EditMoraTitle_plazo}" required="true" requiredMessage="#{bundle.EditMoraRequiredMessage_plazo}"/>
+                        <p:outputLabel value="#{bundle.EditMoraLabel_diasEnMora}" for="diasEnMora" />
+                        <p:inputText id="diasEnMora" value="#{moraController.selected.diasEnMora}" title="#{bundle.EditMoraTitle_diasEnMora}" required="true" requiredMessage="#{bundle.EditMoraRequiredMessage_diasEnMora}"/>
+                        <p:outputLabel value="#{bundle.EditMoraLabel_saldoTotalDeFactura}" for="saldoTotalDeFactura" />
+                        <p:inputText id="saldoTotalDeFactura" value="#{moraController.selected.saldoTotalDeFactura}" title="#{bundle.EditMoraTitle_saldoTotalDeFactura}" required="true" requiredMessage="#{bundle.EditMoraRequiredMessage_saldoTotalDeFactura}"/>
+                        <p:outputLabel value="#{bundle.EditMoraLabel_usuarioUnidadNegocio}" for="usuarioUnidadNegocio" />
+                        <p:selectOneMenu id="usuarioUnidadNegocio" value="#{moraController.selected.usuarioUnidadNegocio}" required="true" requiredMessage="#{bundle.EditMoraRequiredMessage_usuarioUnidadNegocio}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{usuarioUnidadNegocioController.itemsAvailableSelectOne}"
+                                           var="usuarioUnidadNegocioItem"
+                                           itemValue="#{usuarioUnidadNegocioItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditMoraLabel_cliente}" for="cliente" />
+                        <p:selectOneMenu id="cliente" value="#{moraController.selected.cliente}" required="true" requiredMessage="#{bundle.EditMoraRequiredMessage_cliente}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{clienteController.itemsAvailableSelectOne}"
+                                           var="clienteItem"
+                                           itemValue="#{clienteItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{moraController.update}" value="#{bundle.Save}" update="display,:MoraListForm:datalist,:growl" oncomplete="handleSubmit(args, 'MoraEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="MoraEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

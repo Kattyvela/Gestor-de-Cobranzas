@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="RespuestaCreateDlg" widgetVar="RespuestaCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateRespuestaTitle}">
+            <h:form id="RespuestaCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{respuestaController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateRespuestaLabel_respuestaPK_idRespuesta}" for="respuestaPK_idRespuesta" />
+                        <p:inputText id="respuestaPK_idRespuesta" value="#{respuestaController.selected.respuestaPK.idRespuesta}" title="#{bundle.CreateRespuestaTitle_respuestaPK_idRespuesta}" required="true" requiredMessage="#{bundle.CreateRespuestaRequiredMessage_respuestaPK_idRespuesta}"/>
+                        <p:outputLabel value="#{bundle.CreateRespuestaLabel_respuestaCliente}" for="respuestaCliente" />
+                        <p:inputText id="respuestaCliente" value="#{respuestaController.selected.respuestaCliente}" title="#{bundle.CreateRespuestaTitle_respuestaCliente}" />
+                        <p:outputLabel value="#{bundle.CreateRespuestaLabel_fechaCompromisoPago}" for="fechaCompromisoPago" />
+                        <p:calendar id="fechaCompromisoPago" pattern="MM/dd/yyyy" value="#{respuestaController.selected.fechaCompromisoPago}" title="#{bundle.EditRespuestaTitle_fechaCompromisoPago}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateRespuestaLabel_fechaRespuesta}" for="fechaRespuesta" />
+                        <p:calendar id="fechaRespuesta" pattern="MM/dd/yyyy" value="#{respuestaController.selected.fechaRespuesta}" title="#{bundle.EditRespuestaTitle_fechaRespuesta}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateRespuestaLabel_gestion}" for="gestion" />
+                        <p:selectOneMenu id="gestion" value="#{respuestaController.selected.gestion}" required="true" requiredMessage="#{bundle.EditRespuestaRequiredMessage_gestion}">
+                            <f:selectItems value="#{gestionController.itemsAvailableSelectOne}"
+                                           var="gestionItem"
+                                           itemValue="#{gestionItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{respuestaController.create}" value="#{bundle.Save}" update="display,:RespuestaListForm:datalist,:growl" oncomplete="handleSubmit(args,'RespuestaCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="RespuestaCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

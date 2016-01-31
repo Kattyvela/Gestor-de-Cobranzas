@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="AbonoDeudaEditDlg" widgetVar="AbonoDeudaEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditAbonoDeudaTitle}">
+            <h:form id="AbonoDeudaEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{abonoDeudaController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditAbonoDeudaLabel_abonoDeudaPK_idAbonoDeuda}" for="abonoDeudaPK_idAbonoDeuda" />
+                        <p:inputText id="abonoDeudaPK_idAbonoDeuda" value="#{abonoDeudaController.selected.abonoDeudaPK.idAbonoDeuda}" title="#{bundle.EditAbonoDeudaTitle_abonoDeudaPK_idAbonoDeuda}" required="true" requiredMessage="#{bundle.EditAbonoDeudaRequiredMessage_abonoDeudaPK_idAbonoDeuda}"/>
+                        <p:outputLabel value="#{bundle.EditAbonoDeudaLabel_fechaAbono}" for="fechaAbono" />
+                        <p:calendar id="fechaAbono" pattern="MM/dd/yyyy" value="#{abonoDeudaController.selected.fechaAbono}" title="#{bundle.EditAbonoDeudaTitle_fechaAbono}" required="true" requiredMessage="#{bundle.EditAbonoDeudaRequiredMessage_fechaAbono}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditAbonoDeudaLabel_abono}" for="abono" />
+                        <p:inputText id="abono" value="#{abonoDeudaController.selected.abono}" title="#{bundle.EditAbonoDeudaTitle_abono}" required="true" requiredMessage="#{bundle.EditAbonoDeudaRequiredMessage_abono}"/>
+                        <p:outputLabel value="#{bundle.EditAbonoDeudaLabel_mora}" for="mora" />
+                        <p:selectOneMenu id="mora" value="#{abonoDeudaController.selected.mora}" required="true" requiredMessage="#{bundle.EditAbonoDeudaRequiredMessage_mora}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{moraController.itemsAvailableSelectOne}"
+                                           var="moraItem"
+                                           itemValue="#{moraItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditAbonoDeudaLabel_formaPago}" for="formaPago" />
+                        <p:selectOneMenu id="formaPago" value="#{abonoDeudaController.selected.formaPago}" required="true" requiredMessage="#{bundle.EditAbonoDeudaRequiredMessage_formaPago}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{formaPagoController.itemsAvailableSelectOne}"
+                                           var="formaPagoItem"
+                                           itemValue="#{formaPagoItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{abonoDeudaController.update}" value="#{bundle.Save}" update="display,:AbonoDeudaListForm:datalist,:growl" oncomplete="handleSubmit(args, 'AbonoDeudaEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="AbonoDeudaEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

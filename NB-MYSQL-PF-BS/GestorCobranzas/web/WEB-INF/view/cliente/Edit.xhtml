@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ClienteEditDlg" widgetVar="ClienteEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditClienteTitle}">
+            <h:form id="ClienteEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{clienteController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditClienteLabel_idCliente}" for="idCliente" />
+                        <p:inputText id="idCliente" value="#{clienteController.selected.idCliente}" title="#{bundle.EditClienteTitle_idCliente}" required="true" requiredMessage="#{bundle.EditClienteRequiredMessage_idCliente}"/>
+                        <p:outputLabel value="#{bundle.EditClienteLabel_cedulaRuc}" for="cedulaRuc" />
+                        <p:inputText id="cedulaRuc" value="#{clienteController.selected.cedulaRuc}" title="#{bundle.EditClienteTitle_cedulaRuc}" required="true" requiredMessage="#{bundle.EditClienteRequiredMessage_cedulaRuc}"/>
+                        <p:outputLabel value="#{bundle.EditClienteLabel_codCliente}" for="codCliente" />
+                        <p:inputText id="codCliente" value="#{clienteController.selected.codCliente}" title="#{bundle.EditClienteTitle_codCliente}" required="true" requiredMessage="#{bundle.EditClienteRequiredMessage_codCliente}"/>
+                        <p:outputLabel value="#{bundle.EditClienteLabel_telefono1}" for="telefono1" />
+                        <p:inputText id="telefono1" value="#{clienteController.selected.telefono1}" title="#{bundle.EditClienteTitle_telefono1}" required="true" requiredMessage="#{bundle.EditClienteRequiredMessage_telefono1}"/>
+                        <p:outputLabel value="#{bundle.EditClienteLabel_telefono2}" for="telefono2" />
+                        <p:inputText id="telefono2" value="#{clienteController.selected.telefono2}" title="#{bundle.EditClienteTitle_telefono2}" required="true" requiredMessage="#{bundle.EditClienteRequiredMessage_telefono2}"/>
+                        <p:outputLabel value="#{bundle.EditClienteLabel_direccion}" for="direccion" />
+                        <p:inputText id="direccion" value="#{clienteController.selected.direccion}" title="#{bundle.EditClienteTitle_direccion}" required="true" requiredMessage="#{bundle.EditClienteRequiredMessage_direccion}"/>
+                        <p:outputLabel value="#{bundle.EditClienteLabel_registroActivo}" for="registroActivo" />
+                        <p:selectBooleanCheckbox id="registroActivo" value="#{clienteController.selected.registroActivo}" required="true" requiredMessage="#{bundle.EditClienteRequiredMessage_registroActivo}"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{clienteController.update}" value="#{bundle.Save}" update="display,:ClienteListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ClienteEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ClienteEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

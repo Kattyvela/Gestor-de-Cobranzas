@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="GestionViewDlg" widgetVar="GestionViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewGestionTitle}">
+            <h:form id="GestionViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{gestionController.selected != null}">
+                        <h:outputText value="#{bundle.ViewGestionLabel_gestionPK_idGestion}"/>
+                        <h:outputText value="#{gestionController.selected.gestionPK.idGestion}" title="#{bundle.ViewGestionTitle_gestionPK_idGestion}"/>
+                        <h:outputText value="#{bundle.ViewGestionLabel_fechaGestion}"/>
+                        <h:outputText value="#{gestionController.selected.fechaGestion}" title="#{bundle.ViewGestionTitle_fechaGestion}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewGestionLabel_observaciones}"/>
+                        <h:outputText value="#{gestionController.selected.observaciones}" title="#{bundle.ViewGestionTitle_observaciones}"/>
+                        <h:outputText value="#{bundle.ViewGestionLabel_tipoGestionidTipoGestion}"/>
+                        <h:outputText value="#{gestionController.selected.tipoGestionidTipoGestion}" title="#{bundle.ViewGestionTitle_tipoGestionidTipoGestion}"/>
+                        <h:outputText value="#{bundle.ViewGestionLabel_mora}"/>
+                        <h:outputText value="#{gestionController.selected.mora}" title="#{bundle.ViewGestionTitle_mora}"/>
+                        <h:outputText value="#{bundle.ViewGestionLabel_resultado}"/>
+                        <h:outputText value="#{gestionController.selected.resultado}" title="#{bundle.ViewGestionTitle_resultado}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="GestionViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
