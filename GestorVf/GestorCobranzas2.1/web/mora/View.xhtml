@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="MoraViewDlg" widgetVar="MoraViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewMoraTitle}">
+            <h:form id="MoraViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{moraController.selected != null}">
+                        <h:outputText value="#{bundle.ViewMoraLabel_idMora}"/>
+                        <h:outputText value="#{moraController.selected.idMora}" title="#{bundle.ViewMoraTitle_idMora}"/>
+                        <h:outputText value="#{bundle.ViewMoraLabel_descripcion}"/>
+                        <h:outputText value="#{moraController.selected.descripcion}" title="#{bundle.ViewMoraTitle_descripcion}"/>
+                        <h:outputText value="#{bundle.ViewMoraLabel_numfactura}"/>
+                        <h:outputText value="#{moraController.selected.numfactura}" title="#{bundle.ViewMoraTitle_numfactura}"/>
+                        <h:outputText value="#{bundle.ViewMoraLabel_fechafacturacion}"/>
+                        <h:outputText value="#{moraController.selected.fechafacturacion}" title="#{bundle.ViewMoraTitle_fechafacturacion}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewMoraLabel_plazo}"/>
+                        <h:outputText value="#{moraController.selected.plazo}" title="#{bundle.ViewMoraTitle_plazo}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewMoraLabel_diasenmora}"/>
+                        <h:outputText value="#{moraController.selected.diasenmora}" title="#{bundle.ViewMoraTitle_diasenmora}"/>
+                        <h:outputText value="#{bundle.ViewMoraLabel_saldototalfacturamora}"/>
+                        <h:outputText value="#{moraController.selected.saldototalfacturamora}" title="#{bundle.ViewMoraTitle_saldototalfacturamora}"/>
+                        <h:outputText value="#{bundle.ViewMoraLabel_idUsuariounidadnegocio}"/>
+                        <h:outputText value="#{moraController.selected.idUsuariounidadnegocio}" title="#{bundle.ViewMoraTitle_idUsuariounidadnegocio}"/>
+                        <h:outputText value="#{bundle.ViewMoraLabel_idCliente}"/>
+                        <h:outputText value="#{moraController.selected.idCliente}" title="#{bundle.ViewMoraTitle_idCliente}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="MoraViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

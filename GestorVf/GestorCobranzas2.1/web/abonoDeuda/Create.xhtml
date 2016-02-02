@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="AbonoDeudaCreateDlg" widgetVar="AbonoDeudaCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateAbonoDeudaTitle}">
+            <h:form id="AbonoDeudaCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{abonoDeudaController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateAbonoDeudaLabel_idAbonodeuda}" for="idAbonodeuda" />
+                        <p:inputText id="idAbonodeuda" value="#{abonoDeudaController.selected.idAbonodeuda}" title="#{bundle.CreateAbonoDeudaTitle_idAbonodeuda}" required="true" requiredMessage="#{bundle.CreateAbonoDeudaRequiredMessage_idAbonodeuda}"/>
+                        <p:outputLabel value="#{bundle.CreateAbonoDeudaLabel_fechaabono}" for="fechaabono" />
+                        <p:calendar id="fechaabono" pattern="MM/dd/yyyy" value="#{abonoDeudaController.selected.fechaabono}" title="#{bundle.EditAbonoDeudaTitle_fechaabono}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateAbonoDeudaLabel_abono}" for="abono" />
+                        <p:inputText id="abono" value="#{abonoDeudaController.selected.abono}" title="#{bundle.CreateAbonoDeudaTitle_abono}" />
+                        <p:outputLabel value="#{bundle.CreateAbonoDeudaLabel_idFormapago}" for="idFormapago" />
+                        <p:selectOneMenu id="idFormapago" value="#{abonoDeudaController.selected.idFormapago}" >
+                            <f:selectItems value="#{formaDePagoController.itemsAvailableSelectOne}"
+                                           var="idFormapagoItem"
+                                           itemValue="#{idFormapagoItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateAbonoDeudaLabel_idMora}" for="idMora" />
+                        <p:selectOneMenu id="idMora" value="#{abonoDeudaController.selected.idMora}" >
+                            <f:selectItems value="#{moraController.itemsAvailableSelectOne}"
+                                           var="idMoraItem"
+                                           itemValue="#{idMoraItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{abonoDeudaController.create}" value="#{bundle.Save}" update="display,:AbonoDeudaListForm:datalist,:growl" oncomplete="handleSubmit(args,'AbonoDeudaCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="AbonoDeudaCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

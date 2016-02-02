@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="GestionCreateDlg" widgetVar="GestionCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateGestionTitle}">
+            <h:form id="GestionCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{gestionController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateGestionLabel_idGestion}" for="idGestion" />
+                        <p:inputText id="idGestion" value="#{gestionController.selected.idGestion}" title="#{bundle.CreateGestionTitle_idGestion}" required="true" requiredMessage="#{bundle.CreateGestionRequiredMessage_idGestion}"/>
+                        <p:outputLabel value="#{bundle.CreateGestionLabel_fechagestion}" for="fechagestion" />
+                        <p:calendar id="fechagestion" pattern="MM/dd/yyyy" value="#{gestionController.selected.fechagestion}" title="#{bundle.EditGestionTitle_fechagestion}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateGestionLabel_observaciones}" for="observaciones" />
+                        <p:inputText id="observaciones" value="#{gestionController.selected.observaciones}" title="#{bundle.CreateGestionTitle_observaciones}" />
+                        <p:outputLabel value="#{bundle.CreateGestionLabel_idTipogestion}" for="idTipogestion" />
+                        <p:selectOneMenu id="idTipogestion" value="#{gestionController.selected.idTipogestion}" >
+                            <f:selectItems value="#{tipoGestionController.itemsAvailableSelectOne}"
+                                           var="idTipogestionItem"
+                                           itemValue="#{idTipogestionItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateGestionLabel_idMora}" for="idMora" />
+                        <p:selectOneMenu id="idMora" value="#{gestionController.selected.idMora}" >
+                            <f:selectItems value="#{moraController.itemsAvailableSelectOne}"
+                                           var="idMoraItem"
+                                           itemValue="#{idMoraItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateGestionLabel_idResultado}" for="idResultado" />
+                        <p:selectOneMenu id="idResultado" value="#{gestionController.selected.idResultado}" >
+                            <f:selectItems value="#{resultadoController.itemsAvailableSelectOne}"
+                                           var="idResultadoItem"
+                                           itemValue="#{idResultadoItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateGestionLabel_idRespuesta}" for="idRespuesta" />
+                        <p:selectOneMenu id="idRespuesta" value="#{gestionController.selected.idRespuesta}" >
+                            <f:selectItems value="#{respuestaController.itemsAvailableSelectOne}"
+                                           var="idRespuestaItem"
+                                           itemValue="#{idRespuestaItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{gestionController.create}" value="#{bundle.Save}" update="display,:GestionListForm:datalist,:growl" oncomplete="handleSubmit(args,'GestionCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="GestionCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

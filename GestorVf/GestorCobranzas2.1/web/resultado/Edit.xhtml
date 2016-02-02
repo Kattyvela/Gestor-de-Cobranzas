@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ResultadoEditDlg" widgetVar="ResultadoEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditResultadoTitle}">
+            <h:form id="ResultadoEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{resultadoController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditResultadoLabel_idResultado}" for="idResultado" />
+                        <p:inputText id="idResultado" value="#{resultadoController.selected.idResultado}" title="#{bundle.EditResultadoTitle_idResultado}" required="true" requiredMessage="#{bundle.EditResultadoRequiredMessage_idResultado}"/>
+                        <p:outputLabel value="#{bundle.EditResultadoLabel_nombre}" for="nombre" />
+                        <p:inputText id="nombre" value="#{resultadoController.selected.nombre}" title="#{bundle.EditResultadoTitle_nombre}" />
+                        <p:outputLabel value="#{bundle.EditResultadoLabel_registroactivo}" for="registroactivo" />
+                        <p:inputText id="registroactivo" value="#{resultadoController.selected.registroactivo}" title="#{bundle.EditResultadoTitle_registroactivo}" />
+                        <p:outputLabel value="#{bundle.EditResultadoLabel_idTipogestion}" for="idTipogestion" />
+                        <p:selectOneMenu id="idTipogestion" value="#{resultadoController.selected.idTipogestion}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{tipoGestionController.itemsAvailableSelectOne}"
+                                           var="idTipogestionItem"
+                                           itemValue="#{idTipogestionItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{resultadoController.update}" value="#{bundle.Save}" update="display,:ResultadoListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ResultadoEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ResultadoEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

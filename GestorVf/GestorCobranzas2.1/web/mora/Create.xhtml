@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="MoraCreateDlg" widgetVar="MoraCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateMoraTitle}">
+            <h:form id="MoraCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{moraController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateMoraLabel_idMora}" for="idMora" />
+                        <p:inputText id="idMora" value="#{moraController.selected.idMora}" title="#{bundle.CreateMoraTitle_idMora}" required="true" requiredMessage="#{bundle.CreateMoraRequiredMessage_idMora}"/>
+                        <p:outputLabel value="#{bundle.CreateMoraLabel_descripcion}" for="descripcion" />
+                        <p:inputText id="descripcion" value="#{moraController.selected.descripcion}" title="#{bundle.CreateMoraTitle_descripcion}" />
+                        <p:outputLabel value="#{bundle.CreateMoraLabel_numfactura}" for="numfactura" />
+                        <p:inputText id="numfactura" value="#{moraController.selected.numfactura}" title="#{bundle.CreateMoraTitle_numfactura}" />
+                        <p:outputLabel value="#{bundle.CreateMoraLabel_fechafacturacion}" for="fechafacturacion" />
+                        <p:calendar id="fechafacturacion" pattern="MM/dd/yyyy" value="#{moraController.selected.fechafacturacion}" title="#{bundle.EditMoraTitle_fechafacturacion}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateMoraLabel_plazo}" for="plazo" />
+                        <p:calendar id="plazo" pattern="MM/dd/yyyy" value="#{moraController.selected.plazo}" title="#{bundle.EditMoraTitle_plazo}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateMoraLabel_diasenmora}" for="diasenmora" />
+                        <p:inputText id="diasenmora" value="#{moraController.selected.diasenmora}" title="#{bundle.CreateMoraTitle_diasenmora}" />
+                        <p:outputLabel value="#{bundle.CreateMoraLabel_saldototalfacturamora}" for="saldototalfacturamora" />
+                        <p:inputText id="saldototalfacturamora" value="#{moraController.selected.saldototalfacturamora}" title="#{bundle.CreateMoraTitle_saldototalfacturamora}" />
+                        <p:outputLabel value="#{bundle.CreateMoraLabel_idUsuariounidadnegocio}" for="idUsuariounidadnegocio" />
+                        <p:selectOneMenu id="idUsuariounidadnegocio" value="#{moraController.selected.idUsuariounidadnegocio}" >
+                            <f:selectItems value="#{usuarioUnidadNegocioController.itemsAvailableSelectOne}"
+                                           var="idUsuariounidadnegocioItem"
+                                           itemValue="#{idUsuariounidadnegocioItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateMoraLabel_idCliente}" for="idCliente" />
+                        <p:selectOneMenu id="idCliente" value="#{moraController.selected.idCliente}" >
+                            <f:selectItems value="#{clienteController.itemsAvailableSelectOne}"
+                                           var="idClienteItem"
+                                           itemValue="#{idClienteItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{moraController.create}" value="#{bundle.Save}" update="display,:MoraListForm:datalist,:growl" oncomplete="handleSubmit(args,'MoraCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="MoraCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

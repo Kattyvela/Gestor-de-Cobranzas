@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="MoraEditDlg" widgetVar="MoraEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditMoraTitle}">
+            <h:form id="MoraEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{moraController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditMoraLabel_idMora}" for="idMora" />
+                        <p:inputText id="idMora" value="#{moraController.selected.idMora}" title="#{bundle.EditMoraTitle_idMora}" required="true" requiredMessage="#{bundle.EditMoraRequiredMessage_idMora}"/>
+                        <p:outputLabel value="#{bundle.EditMoraLabel_descripcion}" for="descripcion" />
+                        <p:inputText id="descripcion" value="#{moraController.selected.descripcion}" title="#{bundle.EditMoraTitle_descripcion}" />
+                        <p:outputLabel value="#{bundle.EditMoraLabel_numfactura}" for="numfactura" />
+                        <p:inputText id="numfactura" value="#{moraController.selected.numfactura}" title="#{bundle.EditMoraTitle_numfactura}" />
+                        <p:outputLabel value="#{bundle.EditMoraLabel_fechafacturacion}" for="fechafacturacion" />
+                        <p:calendar id="fechafacturacion" pattern="MM/dd/yyyy" value="#{moraController.selected.fechafacturacion}" title="#{bundle.EditMoraTitle_fechafacturacion}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditMoraLabel_plazo}" for="plazo" />
+                        <p:calendar id="plazo" pattern="MM/dd/yyyy" value="#{moraController.selected.plazo}" title="#{bundle.EditMoraTitle_plazo}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditMoraLabel_diasenmora}" for="diasenmora" />
+                        <p:inputText id="diasenmora" value="#{moraController.selected.diasenmora}" title="#{bundle.EditMoraTitle_diasenmora}" />
+                        <p:outputLabel value="#{bundle.EditMoraLabel_saldototalfacturamora}" for="saldototalfacturamora" />
+                        <p:inputText id="saldototalfacturamora" value="#{moraController.selected.saldototalfacturamora}" title="#{bundle.EditMoraTitle_saldototalfacturamora}" />
+                        <p:outputLabel value="#{bundle.EditMoraLabel_idUsuariounidadnegocio}" for="idUsuariounidadnegocio" />
+                        <p:selectOneMenu id="idUsuariounidadnegocio" value="#{moraController.selected.idUsuariounidadnegocio}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{usuarioUnidadNegocioController.itemsAvailableSelectOne}"
+                                           var="idUsuariounidadnegocioItem"
+                                           itemValue="#{idUsuariounidadnegocioItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditMoraLabel_idCliente}" for="idCliente" />
+                        <p:selectOneMenu id="idCliente" value="#{moraController.selected.idCliente}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{clienteController.itemsAvailableSelectOne}"
+                                           var="idClienteItem"
+                                           itemValue="#{idClienteItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{moraController.update}" value="#{bundle.Save}" update="display,:MoraListForm:datalist,:growl" oncomplete="handleSubmit(args, 'MoraEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="MoraEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
