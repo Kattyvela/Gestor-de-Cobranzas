@@ -22,4 +22,8 @@
         <welcome-file>inicio1.xhtml</welcome-file>
         <!--<welcome-file>faces/index.xhtml</welcome-file>-->
     </welcome-file-list>
+    <context-param>
+        <param-name>primefaces.THEME</param-name>
+        <param-value>humanity</param-value>
+</context-param>    
 </web-app>
